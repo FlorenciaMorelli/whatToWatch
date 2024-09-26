@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">whatToWatch</string>
+    <string name="tvMovie">Título</string>
 </resources>
