@@ -27,7 +27,7 @@
         android:layout_margin="8dp"
         android:text="@string/tvMovie"
         />
-        
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
