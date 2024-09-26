@@ -1,3 +1,20 @@
+import java.io.FileNotFoundException
+import java.util.Properties
+
+//  Load properties from apikeys.properties file
+val properties = Properties().apply {
+    val file = rootProject.file("apikeys.properties")
+    if (file.exists()) {
+        load(file.inputStream())
+    } else {
+        throw FileNotFoundException("apikeys.properties file not found.")
+    }
+}
+//  Define API Key from prperties
+val tmdbApiKey: String = properties["TMDB_API_KEY"] as String?
+    ?: throw IllegalArgumentException("TMDB_API_KEY key not found on apikeys.properties")
+
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -15,6 +32,11 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        //  Add API Key as an environment variable
+        buildConfigField("String", "TMDB_API_KEY", "\"$tmdbApiKey\"")
+        //  You can call it using:
+        //  val apiKey = BuildConfig.TMDB_API_KEY
     }
 
     buildTypes {
@@ -33,6 +55,14 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    viewBinding {
+        enable = true
+    }
+
+    buildFeatures{
+        buildConfig = true
+    }
 }
 
 dependencies {
@@ -45,4 +75,12 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.picasso:picasso:2.5.2")
+
+    implementation("androidx.activity:activity-ktx:1.9.2")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.5")
 }
