@@ -35,7 +35,7 @@ class MainViewModel : ViewModel() {
                 val response = RetrofitClient.apiService.searchMovies(apiKey, query)
                 _movies.value = response.movies
             } catch (e: Exception) {
-                Log.e("MovieViewModel", "Error al buscar películas", e)
+                Log.e("MovieViewModel", "Error fetching movies", e)
             }
         }
     }

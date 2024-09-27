@@ -1,5 +1,6 @@
 package com.example.whattowatch
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
@@ -39,7 +40,13 @@ class MainActivity : AppCompatActivity() {
 
         //  Observer for the list of movies in the ViewModel and update the adapter accordingly when the data changes
         movieViewModel.movies.observe(this, Observer { movies ->
-            binding.rvMovies.adapter = MovieAdapter(movies)
+            movieAdapter = MovieAdapter(movies) { movie ->
+                val intent = Intent(this, MovieDetail::class.java).apply {
+                    putExtra("MOVIE_ID", movie.id)  //  Movie ID is passed to the MovieDetail activity
+                }
+                startActivity(intent)
+            }
+            binding.rvMovies.adapter = movieAdapter
         })
 
         // Loading movies using the API key and the ViewModel to fetch the data and update the UI.
