@@ -14,16 +14,28 @@ import kotlinx.coroutines.withContext
 
 class MainViewModel : ViewModel() {
 
-    val movies = MutableLiveData<List<Movie>>()
+    private val _movies = MutableLiveData<List<Movie>>()
+    val movies: LiveData<List<Movie>> get() = _movies
     val errorMessage = MutableLiveData<String>()
 
     fun getMovies(apiKey: String) {
         viewModelScope.launch {
             try {
                 val response = RetrofitClient.apiService.getPopularMovies(apiKey)
-                movies.postValue(response.movies)
+                _movies.postValue(response.movies)
             } catch (e: Exception) {
                 errorMessage.postValue("Error: ${e.message}")
+            }
+        }
+    }
+
+    fun searchMovies(apiKey: String, query: String) {
+        viewModelScope.launch {
+            try {
+                val response = RetrofitClient.apiService.searchMovies(apiKey, query)
+                _movies.value = response.movies
+            } catch (e: Exception) {
+                Log.e("MovieViewModel", "Error al buscar películas", e)
             }
         }
     }
