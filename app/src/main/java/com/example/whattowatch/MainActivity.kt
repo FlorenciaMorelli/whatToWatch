@@ -28,18 +28,19 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Extracting API Key from apikeys.properties
         val apiKey = BuildConfig.TMDB_API_KEY
 
-        // Configuración del RecyclerView
-        binding.rvMovies.layoutManager = GridLayoutManager(this, 3)
+        //  RecyclerView configuration and adapter setup for movies
+        binding.rvMovies.layoutManager = GridLayoutManager(this, 2)
 
-        // Observamos los datos de películas en el ViewModel
+        //  Observer for the list of movies in the ViewModel and update the adapter accordingly when the data changes
         movieViewModel.movies.observe(this, Observer { movies ->
             binding.rvMovies.adapter = MovieAdapter(movies)
         })
 
-        // Cargar las películas desde la API (usa tu API_KEY aquí)
+        // Loading movies using the API key and the ViewModel to fetch the data and update the UI.
         movieViewModel.getMovies(apiKey)
-
+        
     }
 }
