@@ -18,6 +18,5 @@ class MovieAdapter(var movies: List<Movie>): RecyclerView.Adapter<MovieViewHolde
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val item = movies[position]
         holder.bind(item)
-        Log.d("MovieAdapter", "onBindViewHolder tiene el item: ${item}")
     }
 }

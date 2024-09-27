@@ -14,20 +14,16 @@ import kotlinx.coroutines.withContext
 
 class MainViewModel : ViewModel() {
 
-    private val _movies = MutableLiveData<List<Movie>>()
-    val movies: LiveData<List<Movie>> = _movies
+    val movies = MutableLiveData<List<Movie>>()
+    val errorMessage = MutableLiveData<String>()
 
-    val apiKey = BuildConfig.TMDB_API_KEY
-
-    fun fetchData(apiKey: String, onResult: (MovieResponse?) -> Unit){
-        viewModelScope.launch(Dispatchers.IO){
-            Log.d("MainViewModel", "Antes de llamar a getPopular()")
-            val response = RetrofitClient.api.getPopular(apiKey)
-            if (response.isSuccessful){
-                Log.d("MainViewModel", "Response de getPopular(): ${response.body()}")
-                onResult(response.body())
-            } else {
-                onResult(null)
+    fun getMovies(apiKey: String) {
+        viewModelScope.launch {
+            try {
+                val response = RetrofitClient.apiService.getPopularMovies(apiKey)
+                movies.postValue(response.movies)
+            } catch (e: Exception) {
+                errorMessage.postValue("Error: ${e.message}")
             }
         }
     }

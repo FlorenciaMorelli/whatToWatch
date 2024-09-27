@@ -3,9 +3,11 @@ package com.example.whattowatch
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -16,46 +18,28 @@ import com.example.whattowatch.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var viewModel: MainViewModel
-    private lateinit var adapter: MovieAdapter
-    private val movies = listOf<Movie>()
 
+    private lateinit var binding: ActivityMainBinding
+    private val movieViewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = ActivityMainBinding.inflate(layoutInflater)
-
         super.onCreate(savedInstanceState)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
-
 
         val apiKey = BuildConfig.TMDB_API_KEY
 
-        viewModel.fetchData(apiKey){ movie ->    //  Función lambda
-            movie?.let { //  El let hace que trabajemos sobre datos que NO SON NULOS
-                lifecycleScope.launch {
-                    initRecycler()
-                }
-            }
+        // Configuración del RecyclerView
+        binding.rvMovies.layoutManager = GridLayoutManager(this, 3)
 
-        }
+        // Observamos los datos de películas en el ViewModel
+        movieViewModel.movies.observe(this, Observer { movies ->
+            binding.rvMovies.adapter = MovieAdapter(movies)
+        })
 
+        // Cargar las películas desde la API (usa tu API_KEY aquí)
+        movieViewModel.getMovies(apiKey)
 
-
-        viewModel.movies.observe(this){
-            adapter.movies = it
-            adapter.notifyDataSetChanged()
-            Log.d("MainActivity", "Cambió la info a: ${adapter}")
-        }
-    }
-
-    private fun initRecycler(){
-        val layoutManager = GridLayoutManager(this, 3)
-        binding.rvMovies.layoutManager = layoutManager
-        adapter = MovieAdapter(movies)
-        binding.rvMovies.adapter = adapter
-        Log.d("MainActivity", "Cargando recyclerview con: ${adapter}")
     }
 }
