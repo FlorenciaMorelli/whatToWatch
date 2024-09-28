@@ -54,7 +54,9 @@ class MovieDetail : AppCompatActivity() {
         binding.tvDetailDate.text = year?.toString() ?: ""
 
         //  Set the rating to the TextView
-        binding.tvDetailRating.text = movie.score
+        val score = movie.score.toDouble()
+        val formattedScore = String.format("%.2f", score)
+        binding.tvDetailRating.text = "⭐ $formattedScore"
 
         // Construct the full image URL
         val imageUrl = "https://image.tmdb.org/t/p/w500${movie.image}"
