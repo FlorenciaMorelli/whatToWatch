@@ -4,6 +4,8 @@
     android:layout_width="140dp"
     android:layout_height="220dp"
     app:cardCornerRadius="32dp"
+    app:cardBackgroundColor="@color/background"
+    android:elevation="10dp"
     android:layout_margin="16dp">
 
     <LinearLayout
@@ -28,6 +30,7 @@
         android:layout_gravity="center"
         android:textAlignment="center"
         android:text="@string/tvMovie"
+        android:textColor="@color/secondaryText"
         />
 
     </LinearLayout>
