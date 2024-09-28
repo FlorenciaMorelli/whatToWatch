@@ -12,6 +12,8 @@ import com.example.whattowatch.model.Movie
 import com.example.whattowatch.viewmodel.MainViewModel
 import com.example.whattowatch.viewmodel.MovieDetailViewModel
 import com.squareup.picasso.Picasso
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class MovieDetail : AppCompatActivity() {
 
@@ -19,8 +21,8 @@ class MovieDetail : AppCompatActivity() {
     private val movieDetailViewModel: MovieDetailViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         binding = ActivityMovieDetailBinding.inflate(layoutInflater)
+        super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         // Extracting API Key from apikeys.properties
@@ -41,7 +43,21 @@ class MovieDetail : AppCompatActivity() {
     }
 
     private fun displayMovieDetails(movie: Movie) {
-        binding.tvMovieSelected.text = movie.title
+        //  Apply the data to the views
+        binding.tvDetailTitle.text = movie.title
+        binding.tvDetailOverview.text = movie.description
+
+        //  Obtain the year from the date and set it to the TextView
+        val movieDate = movie.date
+        val simpleDateFormat = SimpleDateFormat("yyyy", Locale.getDefault())
+        val year = simpleDateFormat.parse(movieDate)?.year?.plus(1900)
+        binding.tvDetailDate.text = year?.toString() ?: ""
+
+        //  Set the rating to the TextView
+        val score = movie.score.toDouble()
+        val formattedScore = String.format("%.2f", score)
+        binding.tvDetailRating.text = "⭐ $formattedScore"
+
         // Construct the full image URL
         val imageUrl = "https://image.tmdb.org/t/p/w500${movie.image}"
 

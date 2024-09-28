@@ -1,4 +1,7 @@
 <resources>
-    <string name="app_name">whatToWatch</string>
+    <string name="app_name">What To Watch?</string>
     <string name="tvMovie">Título</string>
+    <string name="overview_placeholder">Sinopsis</string>
+    <string name="date_placeholder">2024</string>
+    <string name="rating_placeholder">4.5</string>
 </resources>
