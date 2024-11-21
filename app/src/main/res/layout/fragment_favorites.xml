@@ -5,6 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
+    android:padding="10dp"
     tools:context=".view.fragments.FavoritesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -21,7 +23,8 @@
         android:id="@+id/empty_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No hay shows favoritos"
+        android:text="@string/tv_empty"
+        android:textColor="@color/secondaryText"
         android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
