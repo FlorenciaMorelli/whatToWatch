@@ -27,7 +27,7 @@ class FavoriteShowAdapter(
 
     override fun getItemCount(): Int = favoriteShows.size
 
-    // Método para actualizar la lista de favoritos
+    //  Favorite list updating method
     fun updateList(newShows: List<FavoriteShow>) {
         favoriteShows.clear()
         favoriteShows.addAll(newShows)

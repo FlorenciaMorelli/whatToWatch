@@ -35,7 +35,7 @@ class FavoritesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Proporcionar el ViewModel usando un Factory
+        //  Get the ViewModel by Factory
         val viewModelFactory = FavoriteShowViewModelFactory(requireActivity().application)
         favoritesViewModel = ViewModelProvider(this, viewModelFactory)[FavoriteShowViewModel::class.java]
 

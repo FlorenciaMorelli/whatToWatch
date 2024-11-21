@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
         val favoritesFragment = FavoritesFragment()
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, favoritesFragment)
-            .addToBackStack(null) // Esto permite regresar al fragmento anterior
+            .addToBackStack(null)
             .commit()
     }
 
