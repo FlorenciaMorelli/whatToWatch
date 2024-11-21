@@ -10,7 +10,7 @@ val properties = Properties().apply {
         throw FileNotFoundException("apikeys.properties file not found.")
     }
 }
-//  Define API Key from prperties
+//  Define API Key from properties
 val tmdbApiKey: String = properties["TMDB_API_KEY"] as String?
     ?: throw IllegalArgumentException("TMDB_API_KEY key not found on apikeys.properties")
 
@@ -36,7 +36,7 @@ android {
 
         //  Add API Key as an environment variable
         buildConfigField("String", "TMDB_API_KEY", "\"$tmdbApiKey\"")
-        //  You can call it using:
+        //  REMINDER: You can call it using
         //  val apiKey = BuildConfig.TMDB_API_KEY
     }
 
@@ -83,15 +83,18 @@ dependencies {
     implementation("com.squareup.picasso:picasso:2.5.2")
 
     implementation("androidx.activity:activity-ktx:1.9.2")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1") // ViewModel con Kotlin
-    implementation("androidx.fragment:fragment-ktx:1.6.1")             // Extensiones de Fragment
 
+    //  ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
 
+    //  Fragment
+    implementation("androidx.fragment:fragment-ktx:1.6.1")
+
+    //  Room
     val room_version = "2.6.1"
-
     implementation("androidx.room:room-runtime:$room_version")
     kapt("androidx.room:room-compiler:$room_version")
 
-    // optional - Kotlin Extensions and Coroutines support for Room
+    //  Kotlin Extensions and Coroutines support for Room
     implementation("androidx.room:room-ktx:$room_version")
 }
