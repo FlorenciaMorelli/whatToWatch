@@ -37,6 +37,10 @@ class MovieDetail : AppCompatActivity() {
                 displayMovieDetails(it)
             }
         })
+
+        binding.btnAddFavorite.setOnClickListener{
+            //  TO DO: add to favorites function
+        }
     }
 
     private fun displayMovieDetails(movie: Movie) {
