@@ -1,6 +1,7 @@
 package com.example.whattowatch.view.activities
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -11,6 +12,7 @@ import com.example.whattowatch.model.entities.FavoriteShow
 import com.example.whattowatch.model.entities.Movie
 import com.example.whattowatch.model.network.AppDatabase
 import com.example.whattowatch.model.network.FavoriteShowDao
+import com.example.whattowatch.viewmodel.FavoriteShowViewModel
 import com.example.whattowatch.viewmodel.MovieDetailViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
@@ -24,6 +26,7 @@ class MovieDetail : AppCompatActivity() {
 
     private lateinit var binding: ActivityMovieDetailBinding
     private val movieDetailViewModel: MovieDetailViewModel by viewModels()
+    private val favoriteShowViewModel: FavoriteShowViewModel by viewModels()
     private lateinit var database: AppDatabase
     private lateinit var favoriteShowDao: FavoriteShowDao
 
@@ -65,9 +68,11 @@ class MovieDetail : AppCompatActivity() {
 
     private suspend fun addToFavorites(movie: Movie) {
         val favoriteShow = FavoriteShow(movie.id, movie.title, movie.image, movie.description)
+        Log.d("MovieDetailActivity", "favorite show: $favoriteShow")
 
         withContext(Dispatchers.IO){
-            favoriteShowDao.insert(favoriteShow)
+            favoriteShowViewModel.addFavorite(favoriteShow)
+            Log.d("MovieDetailActivity", "Agregó por favoriteShowViewModel.addFavorite(show: FavoriteShow) $favoriteShow")
         }
 
         withContext(Dispatchers.Main) {

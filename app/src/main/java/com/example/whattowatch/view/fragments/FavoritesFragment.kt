@@ -1,11 +1,13 @@
 package com.example.whattowatch.view.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.whattowatch.databinding.FragmentFavoritesBinding
@@ -53,11 +55,12 @@ class FavoritesFragment : Fragment() {
     }
 
     private fun observeFavorites() {
-        favoritesViewModel.favoriteShows.observe(viewLifecycleOwner) { favoriteShows ->
-            favoriteShowAdapter.updateList(favoriteShows)
+        favoritesViewModel.favoriteShows.observe(viewLifecycleOwner, Observer { movies ->
+            Log.d("FavoritesFragment", "Lista de películas faveadas: $movies")
+            favoriteShowAdapter.updateList(movies)
             binding.emptyView.visibility =
-                if (favoriteShows.isEmpty()) View.VISIBLE else View.GONE
-        }
+                if (movies.isEmpty()) View.VISIBLE else View.GONE
+        })
     }
 
     override fun onDestroyView() {

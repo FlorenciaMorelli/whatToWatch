@@ -7,7 +7,7 @@ import com.example.whattowatch.databinding.ItemFavoriteShowBinding
 import com.example.whattowatch.model.entities.FavoriteShow
 
 class FavoriteShowAdapter(
-    private val onRemoveClick: (FavoriteShow) -> Unit
+    private val onItemClick: (FavoriteShow) -> Unit
 ) : RecyclerView.Adapter<FavoriteShowViewHolder>() {
 
     private val favoriteShows = mutableListOf<FavoriteShow>()
@@ -18,11 +18,11 @@ class FavoriteShowAdapter(
             parent,
             false
         )
-        return FavoriteShowViewHolder(binding, onRemoveClick)
+        return FavoriteShowViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: FavoriteShowViewHolder, position: Int) {
-        holder.bind(favoriteShows[position])
+        holder.bind(favoriteShows[position], onItemClick)
     }
 
     override fun getItemCount(): Int = favoriteShows.size
