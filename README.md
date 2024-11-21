@@ -1,5 +1,7 @@
 # What To Watch (Android Mobile App)
 
+Download our [What To Watch APK](https://drive.google.com/file/d/1qAZSZ_SVLxcGTH2Rd4lZ5m9SW-C-OBWI/view?usp=sharing) to get a taste yourself.
+
 ## Pre-requesites
 
 - Android Studio
