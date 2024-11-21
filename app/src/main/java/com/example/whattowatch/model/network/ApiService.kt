@@ -1,8 +1,8 @@
-package com.example.whattowatch
+package com.example.whattowatch.model.network
 
 
-import com.example.whattowatch.model.Movie
-import com.example.whattowatch.model.MovieResponse
+import com.example.whattowatch.model.entities.Movie
+import com.example.whattowatch.model.repositories.MovieResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

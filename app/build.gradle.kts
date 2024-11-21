@@ -18,6 +18,7 @@ val tmdbApiKey: String = properties["TMDB_API_KEY"] as String?
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("kotlin-kapt")
 }
 
 android {
@@ -82,5 +83,15 @@ dependencies {
     implementation("com.squareup.picasso:picasso:2.5.2")
 
     implementation("androidx.activity:activity-ktx:1.9.2")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.5")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1") // ViewModel con Kotlin
+    implementation("androidx.fragment:fragment-ktx:1.6.1")             // Extensiones de Fragment
+
+
+    val room_version = "2.6.1"
+
+    implementation("androidx.room:room-runtime:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:$room_version")
 }

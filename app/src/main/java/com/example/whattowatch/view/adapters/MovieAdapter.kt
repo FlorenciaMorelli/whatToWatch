@@ -1,11 +1,11 @@
-package com.example.whattowatch.adapter
+package com.example.whattowatch.view.adapters
 
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.whattowatch.R
-import com.example.whattowatch.model.Movie
+import com.example.whattowatch.model.entities.Movie
 
 class MovieAdapter(
     var movies: List<Movie>,

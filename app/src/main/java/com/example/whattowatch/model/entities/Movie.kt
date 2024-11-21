@@ -1,4 +1,4 @@
-package com.example.whattowatch.model
+package com.example.whattowatch.model.entities
 
 import com.google.gson.annotations.SerializedName
 

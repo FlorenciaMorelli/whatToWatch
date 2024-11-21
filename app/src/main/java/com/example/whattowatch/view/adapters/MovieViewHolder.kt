@@ -1,12 +1,10 @@
-package com.example.whattowatch.adapter
+package com.example.whattowatch.view.adapters
 
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.whattowatch.databinding.ItemMovieBinding
-import com.example.whattowatch.model.Movie
+import com.example.whattowatch.model.entities.Movie
 import com.squareup.picasso.Picasso
-import kotlinx.coroutines.withContext
 
 class MovieViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
@@ -21,7 +19,7 @@ class MovieViewHolder(view: View): RecyclerView.ViewHolder(view) {
         Picasso.with(itemView.context)
             .load(posterUrl)
             .into(binding.ivMovie)           // ImageView donde se carga el poster
-
+        // TO DO: placeholder y error
         // .placeholder(R.drawable.placeholder)  // Opcional, imagen mientras se carga
         //            .error(R.drawable.error_image)        // Opcional, imagen si falla
     }
