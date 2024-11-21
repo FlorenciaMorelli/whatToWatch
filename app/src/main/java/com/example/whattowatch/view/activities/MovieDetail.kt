@@ -1,14 +1,22 @@
 package com.example.whattowatch.view.activities
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.example.whattowatch.BuildConfig
 import com.example.whattowatch.databinding.ActivityMovieDetailBinding
+import com.example.whattowatch.model.entities.FavoriteShow
 import com.example.whattowatch.model.entities.Movie
+import com.example.whattowatch.model.network.AppDatabase
+import com.example.whattowatch.model.network.FavoriteShowDao
 import com.example.whattowatch.viewmodel.MovieDetailViewModel
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -16,6 +24,8 @@ class MovieDetail : AppCompatActivity() {
 
     private lateinit var binding: ActivityMovieDetailBinding
     private val movieDetailViewModel: MovieDetailViewModel by viewModels()
+    private lateinit var database: AppDatabase
+    private lateinit var favoriteShowDao: FavoriteShowDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMovieDetailBinding.inflate(layoutInflater)
@@ -24,6 +34,10 @@ class MovieDetail : AppCompatActivity() {
 
         // Extracting API Key from apikeys.properties
         val apiKey = BuildConfig.TMDB_API_KEY
+
+        //  Initializing DAO
+        database = AppDatabase.getInstance(this)
+        favoriteShowDao = database.favoriteShowDao()
 
         val movieId = intent.getIntExtra("MOVIE_ID", -1)
 
@@ -39,8 +53,27 @@ class MovieDetail : AppCompatActivity() {
         })
 
         binding.btnAddFavorite.setOnClickListener{
-            //  TO DO: add to favorites function
+            movieDetailViewModel.movieDetails.observe(this, Observer {movie ->
+                movie?.let {
+                    CoroutineScope(Dispatchers.Main).launch {
+                        addToFavorites(movie)
+                    }
+                }
+            })
         }
+    }
+
+    private suspend fun addToFavorites(movie: Movie) {
+        val favoriteShow = FavoriteShow(movie.id, movie.title, movie.image, movie.description)
+
+        withContext(Dispatchers.IO){
+            favoriteShowDao.insert(favoriteShow)
+        }
+
+        withContext(Dispatchers.Main) {
+            Toast.makeText(this@MovieDetail, "Película agregada a favoritos", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     private fun displayMovieDetails(movie: Movie) {
