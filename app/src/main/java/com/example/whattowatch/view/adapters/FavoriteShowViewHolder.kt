@@ -16,8 +16,9 @@ class FavoriteShowViewHolder(
         binding.apply {
             binding.favoriteShowName.text = show.name
             // Cargar la imagen usando Picasso
+            val posterUrl = "https://image.tmdb.org/t/p/w500/${show.image}"
             Picasso.with(itemView.context)
-                .load(show.image)
+                .load(posterUrl)
                 .into(binding.favoriteShowImage)
             // TO DO: placeholder y error
 
