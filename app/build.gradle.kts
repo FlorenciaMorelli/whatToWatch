@@ -82,7 +82,9 @@ dependencies {
     implementation("com.squareup.picasso:picasso:2.5.2")
 
     implementation("androidx.activity:activity-ktx:1.9.2")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.5")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1") // ViewModel con Kotlin
+    implementation("androidx.fragment:fragment-ktx:1.6.1")             // Extensiones de Fragment
+
 
     val room_version = "2.6.1"
 

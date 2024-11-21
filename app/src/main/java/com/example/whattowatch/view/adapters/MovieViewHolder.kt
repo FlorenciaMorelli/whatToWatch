@@ -19,7 +19,7 @@ class MovieViewHolder(view: View): RecyclerView.ViewHolder(view) {
         Picasso.with(itemView.context)
             .load(posterUrl)
             .into(binding.ivMovie)           // ImageView donde se carga el poster
-
+        // TO DO: placeholder y error
         // .placeholder(R.drawable.placeholder)  // Opcional, imagen mientras se carga
         //            .error(R.drawable.error_image)        // Opcional, imagen si falla
     }

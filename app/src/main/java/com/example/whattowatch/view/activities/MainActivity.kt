@@ -5,11 +5,14 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.commit
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.whattowatch.BuildConfig
+import com.example.whattowatch.R
 import com.example.whattowatch.view.adapters.MovieAdapter
 import com.example.whattowatch.databinding.ActivityMainBinding
+import com.example.whattowatch.view.fragments.FavoritesFragment
 import com.example.whattowatch.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -65,5 +68,17 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
         })
+
+        binding.btnFavorites.setOnClickListener {
+            openFavoritesFragment()
+        }
     }
+
+    private fun openFavoritesFragment() {
+        supportFragmentManager.commit {
+            replace(R.id.fragment_container, FavoritesFragment())
+            addToBackStack(null) // Para permitir la navegación hacia atrás
+        }
+    }
+
 }

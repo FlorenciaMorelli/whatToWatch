@@ -4,4 +4,7 @@
     <string name="overview_placeholder">Sinopsis</string>
     <string name="date_placeholder">2024</string>
     <string name="rating_placeholder">4.5</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="btn_favorites">Favoritos</string>
 </resources>
