@@ -1,15 +1,12 @@
-package com.example.whattowatch
+package com.example.whattowatch.view.activities
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
+import com.example.whattowatch.BuildConfig
 import com.example.whattowatch.databinding.ActivityMovieDetailBinding
-import com.example.whattowatch.model.Movie
-import com.example.whattowatch.viewmodel.MainViewModel
+import com.example.whattowatch.model.entities.Movie
 import com.example.whattowatch.viewmodel.MovieDetailViewModel
 import com.squareup.picasso.Picasso
 import java.text.SimpleDateFormat

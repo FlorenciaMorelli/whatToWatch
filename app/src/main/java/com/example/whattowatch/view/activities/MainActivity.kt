@@ -1,24 +1,16 @@
-package com.example.whattowatch
+package com.example.whattowatch.view.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.whattowatch.adapter.MovieAdapter
+import com.example.whattowatch.BuildConfig
+import com.example.whattowatch.view.adapters.MovieAdapter
 import com.example.whattowatch.databinding.ActivityMainBinding
-import com.example.whattowatch.model.Movie
 import com.example.whattowatch.viewmodel.MainViewModel
-import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 

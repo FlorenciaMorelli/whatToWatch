@@ -5,12 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.whattowatch.RetrofitClient
-import com.example.whattowatch.model.Movie
-import com.example.whattowatch.model.MovieResponse
-import kotlinx.coroutines.Dispatchers
+import com.example.whattowatch.model.network.RetrofitClient
+import com.example.whattowatch.model.entities.Movie
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MainViewModel : ViewModel() {
 

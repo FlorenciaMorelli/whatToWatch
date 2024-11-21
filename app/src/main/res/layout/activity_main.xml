@@ -8,7 +8,7 @@
     android:paddingHorizontal="16dp"
     android:paddingVertical="30dp"
     android:background="@color/background"
-    tools:context=".MainActivity">
+    tools:context=".view.activities.MainActivity">
 
     <TextView
         android:id="@+id/tv_app_title"
