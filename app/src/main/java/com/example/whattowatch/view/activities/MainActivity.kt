@@ -2,6 +2,7 @@ package com.example.whattowatch.view.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -70,15 +71,17 @@ class MainActivity : AppCompatActivity() {
         })
 
         binding.btnFavorites.setOnClickListener {
+            Log.d("MainActivity", "Favorites button clicked")
             openFavoritesFragment()
         }
     }
 
     private fun openFavoritesFragment() {
-        supportFragmentManager.commit {
-            replace(R.id.fragment_container, FavoritesFragment())
-            addToBackStack(null) // Para permitir la navegación hacia atrás
-        }
+        val favoritesFragment = FavoritesFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, favoritesFragment)
+            .addToBackStack(null) // Esto permite regresar al fragmento anterior
+            .commit()
     }
 
 }

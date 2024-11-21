@@ -15,6 +15,7 @@ interface FavoriteShowDao {
 
     @Delete
     suspend fun delete(show: FavoriteShow)
+
     @Query("SELECT * FROM favorite_shows")
     fun getAllFavorites(): LiveData<List<FavoriteShow>>
 }
