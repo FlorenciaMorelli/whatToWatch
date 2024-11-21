@@ -2,14 +2,18 @@ package com.example.whattowatch.view.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.commit
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.whattowatch.BuildConfig
+import com.example.whattowatch.R
 import com.example.whattowatch.view.adapters.MovieAdapter
 import com.example.whattowatch.databinding.ActivityMainBinding
+import com.example.whattowatch.view.fragments.FavoritesFragment
 import com.example.whattowatch.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -65,5 +69,19 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
         })
+
+        binding.btnFavorites.setOnClickListener {
+            Log.d("MainActivity", "Favorites button clicked")
+            openFavoritesFragment()
+        }
     }
+
+    private fun openFavoritesFragment() {
+        val favoritesFragment = FavoritesFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, favoritesFragment)
+            .addToBackStack(null) // Esto permite regresar al fragmento anterior
+            .commit()
+    }
+
 }
