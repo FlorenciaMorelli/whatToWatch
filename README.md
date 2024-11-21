@@ -11,15 +11,15 @@
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/usuario/nombre-del-repositorio.git
+   git clone https://github.com/FlorenciaMorelli/whatToWatch.git
 
-2. Open the directory on temrinal and execute this command:
+2. Open the directory on terminal and execute this command:
 
    ```bash
    bash setup.sh
+   
+3. Follow the instructions given on the console.
 
 ## Video demonstration
 
-https://github.com/user-attachments/assets/5ee95bf4-bd20-42b7-b883-0f07773e9a25
-
-
+Access [video demonstration on Google Drive](https://drive.google.com/file/d/1A-b8TuQjbpu6HqbwV5yP3wByV6Z35gVh/view?usp=drive_link)
